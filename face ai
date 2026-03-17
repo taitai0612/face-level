@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>AI顔診断</h1>
+<p>カメラを許可してください</p>
+
+<video id="camera" autoplay></video>
+<br>
+<button onclick="takePhoto()">撮影</button>
+
+<canvas id="photo"></canvas>
+
+<script>
+const video = document.getElementById("camera");
+
+navigator.mediaDevices.getUserMedia({ video: true })
+.then(stream => {
+  video.srcObject = stream;
+});
+
+function takePhoto(){
+ alert("あなたの顔は80点です！");
+}
+</script>
+
+</body>
+</html>
